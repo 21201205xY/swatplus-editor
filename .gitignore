@@ -31,3 +31,5 @@ src/api/.venv/*
 src/api/build/
 src/api/Pipfile.lock
 *.log
+参考文档/
+ARCHITECTURE.md
