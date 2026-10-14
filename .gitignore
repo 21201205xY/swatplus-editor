@@ -33,3 +33,5 @@ src/api/Pipfile.lock
 *.log
 参考文档/
 ARCHITECTURE.md
+.agents/
+Codex/

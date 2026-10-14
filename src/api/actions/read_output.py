@@ -307,6 +307,9 @@ class ReadOutput(ExecutableApi):
 			while len(column_types) < len(column_headers):
 				column_types.append('REAL') # Default to REAL for extra columns that don't have data in the first row (could be all nulls)
 		
+		if table_name == "channel_sd_hour": # 小时出流不能由首行零值推断为整数。
+			column_types[column_headers.index("flo_out")] = "REAL" # 保留后续小数流量，避免转换失败写入 NULL。
+
 		# Create table schema
 		columns_with_types = [f"{col_name} {col_type}" for col_name, col_type in zip(column_headers, column_types)]
 		if not columns_with_types:

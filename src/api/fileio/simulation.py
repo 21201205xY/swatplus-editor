@@ -164,7 +164,8 @@ class Print_prt(BaseFileModel):
 							   col(obj_table.daily),
 							   col(obj_table.monthly),
 							   col(obj_table.yearly),
-							   col(obj_table.avann)]
+							   col(obj_table.avann), # 保留原四列顺序，小时列追加在末尾。
+							   col(obj_table.hourly)] # 写出小时开关的表头。
 				self.write_headers(file, header_cols)
 				file.write("\n")
 
@@ -177,6 +178,7 @@ class Print_prt(BaseFileModel):
 					utils.write_bool_yn(file, obj.monthly)
 					utils.write_bool_yn(file, obj.yearly)
 					utils.write_bool_yn(file, obj.avann)
+					utils.write_bool_yn(file, obj.hourly if obj.name == "channel_sd" else False) # MVP 仅允许 SD 河道启用小时输出。
 					file.write("\n")
 					already_written.append(obj.name)
 

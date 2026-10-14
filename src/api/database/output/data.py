@@ -89,6 +89,7 @@ table_labels = {
 }
 
 time_series_labels = {
+	'hour': 'hourly', # 识别小时表后缀并复用河道输出说明。
 	'day': 'daily',
 	'mon': 'monthly',
 	'yr': 'yearly',

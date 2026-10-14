@@ -55,6 +55,7 @@ class Print_prt_object(BaseModel):
 	monthly = BooleanField()
 	yearly = BooleanField()
 	avann = BooleanField()
+	hourly = BooleanField(default=False) # 小时输出默认关闭，由项目库保存独立开关。
 
 
 class Object_prt(BaseModel):
