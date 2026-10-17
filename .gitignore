@@ -35,3 +35,4 @@ src/api/Pipfile.lock
 ARCHITECTURE.md
 .agents/
 Codex/
+src/main/static/

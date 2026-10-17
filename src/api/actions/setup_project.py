@@ -32,6 +32,19 @@ def automatic_updates(project_db):
 
 	conn = lib.open_db(project_db)
 
+	if lib.exists_table(conn, 'print_prt_object'):
+		print_cols = lib.get_column_names(conn, 'print_prt_object')
+		col_names = [v['name'] for v in print_cols]
+		if 'subdaily' not in col_names:
+			migrator = SqliteMigrator(SqliteDatabase(project_db))
+			with migrator.database.atomic():
+				if 'hourly' in col_names:
+					# Preserve the existing subdaily output selection when renaming.
+					migrate(migrator.rename_column('print_prt_object', 'hourly', 'subdaily'))
+				else:
+					migrate(migrator.add_column('print_prt_object', 'subdaily', BooleanField(default=False)))
+			migrator.database.close()
+
 	if lib.exists_table(conn, 'project_config'):
 		config_cols = lib.get_column_names(conn, 'project_config')
 		col_names = [v['name'] for v in config_cols]

@@ -89,11 +89,11 @@ table_labels = {
 }
 
 time_series_labels = {
-	'hour': 'hourly', # 识别小时表后缀并复用河道输出说明。
 	'day': 'daily',
 	'mon': 'monthly',
 	'yr': 'yearly',
-	'aa': 'avg. annual'
+	'aa': 'avg. annual',
+	'subday': 'subdaily' # 放在 day 之后，沿用读取端匹配顺序，避免被识别为 daily。
 }
 
 table_categories = {

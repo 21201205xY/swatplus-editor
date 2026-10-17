@@ -314,8 +314,8 @@ def putRunSettings():
 					daily=o['daily'],
 					monthly=o['monthly'],
 					yearly=o['yearly'],
-					avann=o['avann'], # 保留多年平均开关，追加独立的小时设置。
-					hourly=o['hourly'] # 保存运行页提交的小时输出开关。
+					avann=o['avann'], 
+					subdaily=o['subdaily'] # 保存运行页提交的subdaily输出开关。
 				).where(simulation.Print_prt_object.id == o['id']).execute()
 
 		if 'inputs' in args:
