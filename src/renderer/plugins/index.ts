@@ -1,6 +1,7 @@
 import vuetify from './vuetify'
 import pinia from '../store'
 import router from '../router'
+import i18n from '../i18n'
 
 //Font Awesome
 import { library } from '@fortawesome/fontawesome-svg-core';
@@ -41,6 +42,7 @@ import type { App } from 'vue'
 export function registerPlugins(app: App) {
 	library.add(fas, far, fab);
     app
+        .use(i18n)
         .use(vuetify)
         .use(router)
         .use(pinia)

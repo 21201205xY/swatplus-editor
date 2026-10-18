@@ -1,6 +1,7 @@
 <script setup lang="ts">
 	import { reactive, onMounted, onUnmounted, watch } from 'vue';
 	import { useRoute } from 'vue-router';
+	import { useI18n } from 'vue-i18n';
 	import { useTheme, useDisplay } from 'vuetify';
 	import { useHelpers } from '@/helpers';
 	import SwatPlusToolboxButton from '../components/SwatPlusToolboxButton.vue';
@@ -8,6 +9,7 @@
 	import { ProjectSettings } from '@/typings';
 
 	const route = useRoute();
+	const { t, locale } = useI18n({ useScope: 'global' });
 	const theme = useTheme();
 	const { mobile } = useDisplay();
 	const { api, constants, errors, formatters, currentProject, runProcess, utilities, appUpdate } = useHelpers();
@@ -572,10 +574,10 @@
 	<div>
 		<v-navigation-drawer theme="dark" rail permanent>
 			<div class="px-2">
-				<v-tooltip location="end" text="Expand menu">
+				<v-tooltip location="end" :text="t('navigation.expandMenu')">
 					<template v-slot:activator="{ props }">
 						<v-app-bar-nav-icon v-bind="props" v-if="mobile && route.path === '/' && formatters.isNullOrEmpty(page.error) && currentProject.hasCurrentProject" 
-							rounded="0" variant="text" @click.stop="page.secondaryNav = !page.secondaryNav"></v-app-bar-nav-icon>
+							:aria-label="t('navigation.expandMenu')" rounded="0" variant="text" @click.stop="page.secondaryNav = !page.secondaryNav"></v-app-bar-nav-icon>
 					</template>
 				</v-tooltip>
 			</div>
@@ -596,6 +598,15 @@
 
 			<template #append>
 				<v-list density="compact" nav>
+					<v-list-item prepend-icon="fas fa-language" aria-label="Language / 语言" class="pointer">
+						<v-tooltip activator="parent" location="end">Language / 语言</v-tooltip>
+						<v-menu activator="parent" location="end">
+							<v-list density="compact">
+								<v-list-item title="English" :active="locale === 'en'" @click="locale = 'en'"></v-list-item>
+								<v-list-item title="简体中文" :active="locale === 'zh-CN'" @click="locale = 'zh-CN'"></v-list-item>
+							</v-list>
+						</v-menu>
+					</v-list-item>
 					<v-list-item prepend-icon="fas fa-circle-info" v-if="currentProject.hasCurrentProject" class="pointer">
 						<v-menu activator="parent" location="end" open-on-hover>
 							<v-list density="compact">
