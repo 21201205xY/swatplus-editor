@@ -35,14 +35,13 @@ def automatic_updates(project_db):
 	if lib.exists_table(conn, 'print_prt_object'):
 		print_cols = lib.get_column_names(conn, 'print_prt_object')
 		col_names = [v['name'] for v in print_cols]
-		if 'subdaily' not in col_names:
+		obsolete_cols = [name for name in ('hourly', 'subdaily') if name in col_names]
+		if obsolete_cols:
 			migrator = SqliteMigrator(SqliteDatabase(project_db))
 			with migrator.database.atomic():
-				if 'hourly' in col_names:
-					# Preserve the existing subdaily output selection when renaming.
-					migrate(migrator.rename_column('print_prt_object', 'hourly', 'subdaily'))
-				else:
-					migrate(migrator.add_column('print_prt_object', 'subdaily', BooleanField(default=False)))
+				# Subdaily output is controlled by time.sim, not per-object print flags.
+				for name in obsolete_cols:
+					migrate(migrator.drop_column('print_prt_object', name))
 			migrator.database.close()
 
 	if lib.exists_table(conn, 'project_config'):

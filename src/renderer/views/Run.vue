@@ -104,7 +104,6 @@
 				{ value: 1440, title: '1 Minute' }
 			],
 			printAll: {
-				subdaily: false,
 				daily: false,
 				monthly: false,
 				yearly: false,
@@ -752,15 +751,6 @@ Please check your TxtInOut/diagnostics.out file for any information, and contact
 		};
 	}
 
-	function checkAllSubdaily() {
-		for (let i = 0; i < data.print.objects.length; i++) {
-			if (requiredForCheck(`${data.print.objects[i].name}_subday`)) continue; //暂时没用，只为了跟原开发团队保持一致
-			if (disabledForSubdaily(`${data.print.objects[i].name}_subday`)) continue;
-			data.print.objects[i].subdaily = data.options.printAll.subdaily;
-			pushChg(i);
-		}
-	}
-
 	function checkAllDaily() {
 		//data.options.printAll.daily = !data.options.printAll.daily;
 		for (let i = 0; i < data.print.objects.length; i++) {
@@ -793,11 +783,6 @@ Please check your TxtInOut/diagnostics.out file for any information, and contact
 			data.print.objects[i].avann = data.options.printAll.avann;
 			pushChg(i);
 		}
-	}
-
-	const subdailySupportedObjects = ['channel_sd_subday'];
-	function disabledForSubdaily(name:string) {
-		return !subdailySupportedObjects.includes(name);;
 	}
 
 	function requiredForCheck(nameFormat:any) {
@@ -927,7 +912,6 @@ Please check your TxtInOut/diagnostics.out file for any information, and contact
 											<thead>
 												<tr class="bg-surface">
 													<th class="bg-secondary-tonal"></th>
-													<th class="bg-secondary-tonal">Subdaily</th>
 													<th class="bg-secondary-tonal">Daily</th>
 													<th class="bg-secondary-tonal">Monthly</th>
 													<th class="bg-secondary-tonal">Yearly</th>
@@ -936,7 +920,6 @@ Please check your TxtInOut/diagnostics.out file for any information, and contact
 												</tr>
 												<tr>
 													<th></th>
-													<th class="text-center mx-auto"><v-checkbox density="compact" hide-details v-model="data.options.printAll.subdaily" @update:model-value="checkAllSubdaily"></v-checkbox></th>
 													<th class="text-center"><v-checkbox density="compact" hide-details v-model="data.options.printAll.daily" @update:model-value="checkAllDaily"></v-checkbox></th>
 													<th class="text-center"><v-checkbox density="compact" hide-details v-model="data.options.printAll.monthly" @update:model-value="checkAllMonthly"></v-checkbox></th>
 													<th class="text-center"><v-checkbox density="compact" hide-details v-model="data.options.printAll.yearly" @update:model-value="checkAllYearly"></v-checkbox></th>
@@ -946,11 +929,10 @@ Please check your TxtInOut/diagnostics.out file for any information, and contact
 											</thead>
 											<tbody>
 												<tr class="bg-secondary-tonal">
-													<th colspan="7">Model Components</th>
+													<th colspan="6">Model Components</th>
 												</tr>
 												<tr v-for="([k, v], i) in Object.entries(data.printGroups.model)" :key="i" v-show="!data.printConfig.inactive.includes(k) || data.printConfig.showInactive">
 													<td>{{v}}</td>
-													<td class="text-center"><v-checkbox density="compact" hide-details v-model="data.print.objects[printIndex(k)].subdaily" :disabled="disabledForSubdaily(`${data.print.objects[printIndex(k)].name}_subday`)" /></td> 
 													<td class="text-center"><v-checkbox density="compact" hide-details v-model="data.print.objects[printIndex(k)].daily" /></td>
 													<td class="text-center"><v-checkbox density="compact" hide-details v-model="data.print.objects[printIndex(k)].monthly" /></td>
 													<td class="text-center"><v-checkbox density="compact" hide-details v-model="data.print.objects[printIndex(k)].yearly" :disabled="requiredForCheck(`${data.print.objects[printIndex(k)].name}_yr`)" /></td>
@@ -961,11 +943,10 @@ Please check your TxtInOut/diagnostics.out file for any information, and contact
 													</td>
 												</tr>
 												<tr class="bg-secondary-tonal">
-													<th colspan="7">Basin Model Components</th>
+													<th colspan="6">Basin Model Components</th>
 												</tr>
 												<tr v-for="([k, v], i) in Object.entries(data.printGroups.modelBasin)" :key="i" v-show="!data.printConfig.inactive.includes(k) || data.printConfig.showInactive">
 													<td>{{v}}</td>
-													<td class="text-center"><v-checkbox density="compact" hide-details v-model="data.print.objects[printIndex(k)].subdaily" :disabled="disabledForSubdaily(`${data.print.objects[printIndex(k)].name}_subday`)" /></td> 
 													<td class="text-center"><v-checkbox density="compact" hide-details v-model="data.print.objects[printIndex(k)].daily" /></td>
 													<td class="text-center"><v-checkbox density="compact" hide-details v-model="data.print.objects[printIndex(k)].monthly" /></td>
 													<td class="text-center"><v-checkbox density="compact" hide-details v-model="data.print.objects[printIndex(k)].yearly" /></td>
@@ -976,11 +957,10 @@ Please check your TxtInOut/diagnostics.out file for any information, and contact
 													</td>
 												</tr>
 												<tr class="bg-secondary-tonal" v-show="data.printConfig.showInactive">
-													<th colspan="7">Region Model Components</th>
+													<th colspan="6">Region Model Components</th>
 												</tr>
 												<tr v-for="([k, v], i) in Object.entries(data.printGroups.modelRegion)" :key="i" v-show="!data.printConfig.inactive.includes(k) || data.printConfig.showInactive">
 													<td>{{v}}</td>
-													<td class="text-center"><v-checkbox density="compact" hide-details v-model="data.print.objects[printIndex(k)].subdaily" :disabled="disabledForSubdaily(`${data.print.objects[printIndex(k)].name}_subday`)" /></td> 
 													<td class="text-center"><v-checkbox density="compact" hide-details v-model="data.print.objects[printIndex(k)].daily" /></td>
 													<td class="text-center"><v-checkbox density="compact" hide-details v-model="data.print.objects[printIndex(k)].monthly" /></td>
 													<td class="text-center"><v-checkbox density="compact" hide-details v-model="data.print.objects[printIndex(k)].yearly" /></td>
@@ -988,11 +968,10 @@ Please check your TxtInOut/diagnostics.out file for any information, and contact
 													<td class="code text-muted">{{k}}</td>
 												</tr>
 												<tr class="bg-secondary-tonal">
-													<th colspan="7">Nutrient Balance</th>
+													<th colspan="6">Nutrient Balance</th>
 												</tr>
 												<tr v-for="([k, v], i) in Object.entries(data.printGroups.nutrients)" :key="i" v-show="!data.printConfig.inactive.includes(k) || data.printConfig.showInactive">
 													<td>{{v}}</td>
-													<td class="text-center"><v-checkbox density="compact" hide-details v-model="data.print.objects[printIndex(k)].subdaily" :disabled="disabledForSubdaily(`${data.print.objects[printIndex(k)].name}_subday`)" /></td> 
 													<td class="text-center"><v-checkbox density="compact" hide-details v-model="data.print.objects[printIndex(k)].daily" /></td>
 													<td class="text-center"><v-checkbox density="compact" hide-details v-model="data.print.objects[printIndex(k)].monthly" /></td>
 													<td class="text-center"><v-checkbox density="compact" hide-details v-model="data.print.objects[printIndex(k)].yearly" /></td>
@@ -1000,11 +979,10 @@ Please check your TxtInOut/diagnostics.out file for any information, and contact
 													<td class="code text-muted">{{k}}</td>
 												</tr>
 												<tr class="bg-secondary-tonal">
-													<th colspan="7">Water Balance</th>
+													<th colspan="6">Water Balance</th>
 												</tr>
 												<tr v-for="([k, v], i) in Object.entries(data.printGroups.water)" :key="i" v-show="!data.printConfig.inactive.includes(k) || data.printConfig.showInactive">
 													<td>{{v}}</td>
-													<td class="text-center"><v-checkbox density="compact" hide-details v-model="data.print.objects[printIndex(k)].subdaily" :disabled="disabledForSubdaily(`${data.print.objects[printIndex(k)].name}_subday`)" /></td> 
 													<td class="text-center"><v-checkbox density="compact" hide-details v-model="data.print.objects[printIndex(k)].daily" /></td>
 													<td class="text-center"><v-checkbox density="compact" hide-details v-model="data.print.objects[printIndex(k)].monthly" /></td>
 													<td class="text-center"><v-checkbox density="compact" hide-details v-model="data.print.objects[printIndex(k)].yearly" /></td>
@@ -1012,11 +990,10 @@ Please check your TxtInOut/diagnostics.out file for any information, and contact
 													<td class="code text-muted">{{k}}</td>
 												</tr>
 												<tr class="bg-secondary-tonal">
-													<th colspan="7">Plant Weather</th>
+													<th colspan="6">Plant Weather</th>
 												</tr>
 												<tr v-for="([k, v], i) in Object.entries(data.printGroups.plant)" :key="i" v-show="!data.printConfig.inactive.includes(k) || data.printConfig.showInactive">
 													<td>{{v}}</td>
-													<td class="text-center"><v-checkbox density="compact" hide-details v-model="data.print.objects[printIndex(k)].subdaily" :disabled="disabledForSubdaily(`${data.print.objects[printIndex(k)].name}_subday`)" /></td> 
 													<td class="text-center"><v-checkbox density="compact" hide-details v-model="data.print.objects[printIndex(k)].daily" /></td>
 													<td class="text-center"><v-checkbox density="compact" hide-details v-model="data.print.objects[printIndex(k)].monthly" /></td>
 													<td class="text-center"><v-checkbox density="compact" hide-details v-model="data.print.objects[printIndex(k)].yearly" /></td>
@@ -1024,11 +1001,10 @@ Please check your TxtInOut/diagnostics.out file for any information, and contact
 													<td class="code text-muted">{{k}}</td>
 												</tr>
 												<tr class="bg-secondary-tonal">
-													<th colspan="7">Losses</th>
+													<th colspan="6">Losses</th>
 												</tr>
 												<tr v-for="([k, v], i) in Object.entries(data.printGroups.losses)" :key="i" v-show="!data.printConfig.inactive.includes(k) || data.printConfig.showInactive">
 													<td>{{v}}</td>
-													<td class="text-center"><v-checkbox density="compact" hide-details v-model="data.print.objects[printIndex(k)].subdaily" :disabled="disabledForSubdaily(`${data.print.objects[printIndex(k)].name}_subday`)" /></td> 
 													<td class="text-center"><v-checkbox density="compact" hide-details v-model="data.print.objects[printIndex(k)].daily" /></td>
 													<td class="text-center"><v-checkbox density="compact" hide-details v-model="data.print.objects[printIndex(k)].monthly" /></td>
 													<td class="text-center"><v-checkbox density="compact" hide-details v-model="data.print.objects[printIndex(k)].yearly" /></td>
@@ -1036,11 +1012,10 @@ Please check your TxtInOut/diagnostics.out file for any information, and contact
 													<td class="code text-muted">{{k}}</td>
 												</tr>
 												<tr class="bg-secondary-tonal">
-													<th colspan="7">Salts</th>
+													<th colspan="6">Salts</th>
 												</tr>
 												<tr v-for="([k, v], i) in Object.entries(data.printGroups.salts)" :key="i" v-show="!data.printConfig.inactive.includes(k) || data.printConfig.showInactive">
 													<td>{{v}}</td>
-													<td class="text-center"><v-checkbox density="compact" hide-details v-model="data.print.objects[printIndex(k)].subdaily" :disabled="disabledForSubdaily(`${data.print.objects[printIndex(k)].name}_subday`)" /></td> 
 													<td class="text-center"><v-checkbox density="compact" hide-details v-model="data.print.objects[printIndex(k)].daily" /></td>
 													<td class="text-center"><v-checkbox density="compact" hide-details v-model="data.print.objects[printIndex(k)].monthly" /></td>
 													<td class="text-center"><v-checkbox density="compact" hide-details v-model="data.print.objects[printIndex(k)].yearly" /></td>
@@ -1048,11 +1023,10 @@ Please check your TxtInOut/diagnostics.out file for any information, and contact
 													<td class="code text-muted">{{k}}</td>
 												</tr>
 												<tr class="bg-secondary-tonal">
-													<th colspan="7">Constituents</th>
+													<th colspan="6">Constituents</th>
 												</tr>
 												<tr v-for="([k, v], i) in Object.entries(data.printGroups.cs)" :key="i" v-show="!data.printConfig.inactive.includes(k) || data.printConfig.showInactive">
 													<td>{{v}}</td>
-													<td class="text-center"><v-checkbox density="compact" hide-details v-model="data.print.objects[printIndex(k)].subdaily" :disabled="disabledForSubdaily(`${data.print.objects[printIndex(k)].name}_subday`)" /></td> 
 													<td class="text-center"><v-checkbox density="compact" hide-details v-model="data.print.objects[printIndex(k)].daily" /></td>
 													<td class="text-center"><v-checkbox density="compact" hide-details v-model="data.print.objects[printIndex(k)].monthly" /></td>
 													<td class="text-center"><v-checkbox density="compact" hide-details v-model="data.print.objects[printIndex(k)].yearly" /></td>
@@ -1060,11 +1034,10 @@ Please check your TxtInOut/diagnostics.out file for any information, and contact
 													<td class="code text-muted">{{k}}</td>
 												</tr>
 												<tr class="bg-secondary-tonal">
-													<th colspan="7">gwflow</th>
+													<th colspan="6">gwflow</th>
 												</tr>
 												<tr v-for="([k, v], i) in Object.entries(data.printGroups.gwflow)" :key="i" v-show="!data.printConfig.inactive.includes(k) || data.printConfig.showInactive">
 													<td>{{v}}</td>
-													<td class="text-center"><v-checkbox density="compact" hide-details v-model="data.print.objects[printIndex(k)].subdaily" :disabled="disabledForSubdaily(`${data.print.objects[printIndex(k)].name}_subday`)" /></td> 
 													<td class="text-center"><v-checkbox density="compact" hide-details v-model="data.print.objects[printIndex(k)].daily" /></td>
 													<td class="text-center"><v-checkbox density="compact" hide-details v-model="data.print.objects[printIndex(k)].monthly" /></td>
 													<td class="text-center"><v-checkbox density="compact" hide-details v-model="data.print.objects[printIndex(k)].yearly" /></td>
