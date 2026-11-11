@@ -1,0 +1,13 @@
+{
+	"save": "Save",
+	"cancel": "Cancel",
+	"yes": "Yes",
+	"no": "No",
+	"ok": "OK",
+	"open": "Open",
+	"start": "Start",
+	"create": "Create",
+	"quit": "Quit",
+	"required": "Required",
+	"maximumCharacters": "Maximum {count} characters"
+}

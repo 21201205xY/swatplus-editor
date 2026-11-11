@@ -1,0 +1,151 @@
+{
+	"openDirectory": "Open project directory",
+	"reload": "Reload SWAT+ Editor",
+	"readReleaseNotes": "Read our release notes",
+	"recentProjects": "Recent Projects",
+	"openProject": "Open a project",
+	"openAnotherProject": "Open another project",
+	"createProject": "Create a new project",
+	"changeDescription": "Change name/description",
+	"status": {
+		"title": "Project Status",
+		"weather": "Set up weather stations and weather generators",
+		"inputs": "Wrote SWAT+ input files",
+		"run": "Ran SWAT+",
+		"output": "Imported SWAT+ output into a database for analysis"
+	},
+	"savedScenarios": "Saved Scenarios",
+	"information": {
+		"title": "SWAT+ Project Information",
+		"totalArea": "Total area",
+		"simulationPeriod": "Simulation period",
+		"createdWith": "Created with",
+		"lastSaved": "Last saved"
+	},
+	"objects": {
+		"title": "Object totals",
+		"subbasins": "Subbasins",
+		"hrus": "HRUs",
+		"channels": "Channels",
+		"aquifers": "Aquifers",
+		"reservoirs": "Reservoirs",
+		"routingUnits": "Routing Units",
+		"landscapeUnits": "Landscape Units",
+		"pointSources": "Point Sources / Inlets"
+	},
+	"actions": {
+		"update": "Update Project",
+		"run": "Run Model",
+		"getStarted": "Get Started",
+		"rename": "Change Name",
+		"reimport": "Re-import from GIS",
+		"close": "Close Project"
+	},
+	"open": {
+		"title": "Open Project",
+		"database": "Select your project/GIS SQLite database file",
+		"required": "Select a SQLite database file"
+	},
+	"close": {
+		"title": "Close Current Project?",
+		"question": "This will close the project currently open, {name}. Are you sure?"
+	},
+	"rename": {
+		"title": "Update Project Name and Description"
+	},
+	"fields": {
+		"name": "Project display name",
+		"description": "Briefly describe your project location (main river, country)",
+		"descriptionHint": "25 character limit; spaces will be converted to underscores"
+	},
+	"import": {
+		"title": "Start SWAT+ Editor Project from QSWAT+",
+		"error": "There was an error importing your GIS data.",
+		"introduction": "This is the first time opening your QSWAT+ project in SWAT+ Editor. We need to import your GIS data into SWAT+ objects. This may take a few seconds to several minutes depending on the size of your project."
+	},
+	"lteDescription": "Use SWAT+ lte? This is a lite version of the model that greatly simplifies hydrology and plant growth and does not simulate nutrients, concentrating on gully formation and stream degradation.",
+	"scenario": {
+		"title": "Load Scenario",
+		"error": "There was an error loading your scenario.",
+		"replace": "replace",
+		"runScreen": "run model screen",
+		"warningLabel": "WARNING:",
+		"question": "Are you sure you want to load the scenario, {name}? Loading the scenario will {replace} everything currently loaded in the editor (the default scenario), so please make sure any changes are saved as a new scenario if you wish to keep them. Scenarios can be saved from the {runScreen}.",
+		"warning": "{warning} if you have QGIS open, you may need to completely close it first because it locks some of the files we need to replace. Make sure QGIS is not open, then open just SWAT+ Editor on its own before loading the scenario. SWAT+ Editor can be launched in Windows by searching \"SWAT+ Editor\" in the search bar."
+	},
+	"create": {
+		"title": "Create a New SWAT+ Editor Project",
+		"error": "There was an error creating your project.",
+		"website": "visit our website",
+		"manual": "However, it is not required to use GIS to start your project. Complete the form below to start a SWAT+ Editor project from scratch. A project database will be created for you and you will need to input your spatial connections manually. If you already have a project database, click cancel below and choose the open project button instead.",
+		"folder": "Select your project folder",
+		"folderHint": "This will be where we create your project SQLite database file",
+		"folderRequired": "Please select a folder",
+		"datasets": "Select your SWAT+ datasets SQLite database file",
+		"datasetsHint": "This will be copied to your project folder above",
+		"datasetsRequired": "Please select a SQLite database file",
+		"recommendation": "It is strongly recommended to start your new SWAT+ project from within the QSWAT+ interface. QSWAT+ will set up your watershed and direct you to the editor after HRU delineation. For help using QSWAT+, please {website}."
+	},
+	"reimport": {
+		"title": "Has your watershed changed?",
+		"error": "There was an error re-importing your project GIS data.",
+		"question": "Did you run steps 1 or 2 of QSWAT+ since last opening SWAT+ Editor? If so, we'll need to re-import your watershed data.",
+		"explicitQuestion": "Did you run steps 1 or 2 of QSWAT+ since last opening SWAT+ Editor, or would you like to start over or switch between full SWAT+ and SWAT+ lte? If so, we'll need to re-import your watershed data. Warning: you may lose any changes you've made in the editor so far.",
+		"continue": "No, continue to editor",
+		"confirm": "Yes, import new watershed"
+	},
+	"update": {
+		"title": "Updating Project",
+		"error": "There was an error updating your project.",
+		"installEarlier": "install a compatible earlier version",
+		"fullReleaseNotes": "read our full release notes",
+		"before": "before",
+		"required": "You must update your project to continue using it in this version of SWAT+ Editor. If you do not wish to update your project, please uninstall this version of the editor and {installEarlier}.",
+		"backup": "Your project database may be modified during the upgrade. We will make a backup of the database and store it in the Backups folder within your project directory. There may be changes to the model inputs, so we recommend you {releaseNotes} to see what has changed {before} upgrading your project."
+	},
+	"missing": {
+		"title": "Project Not Found",
+		"description": "The project's files cannot be found. Please use the open project button to select the project database file."
+	},
+	"errors": {
+		"load": "Unable to get project information from database.",
+		"name": "Please enter a name for your project.",
+		"save": "Unable to save changes.",
+		"folder": "Please select a project folder.",
+		"datasets": "Please select a datasets SQLite file.",
+		"importName": "Please give your project a name in the text box below.",
+		"help": "Check to make sure SWAT+ Editor is working properly by checking the Help page and scrolling to the bottom. Contact the developer if needed. First, you might try reloading in case your computer is slow to open the APIs:",
+		"encountered": "SWAT+ Editor encountered an error: {error}"
+	},
+	"welcome": "Welcome to SWAT+ Editor {version}",
+	"releaseIntroduction": "{link} to learn more about this release.",
+	"removeRecent": "Remove {name} from recent projects list",
+	"day": "day {day}",
+	"chart": {
+		"title": "Land use distribution",
+		"area": "Area",
+		"lang": {
+			"contextButtonTitle": "Chart context menu",
+			"viewFullscreen": "View in full screen",
+			"exitFullscreen": "Exit from full screen",
+			"printChart": "Print chart",
+			"downloadPNG": "Download PNG image",
+			"downloadJPEG": "Download JPEG image",
+			"downloadPDF": "Download PDF document",
+			"downloadSVG": "Download SVG vector image",
+			"downloadCSV": "Download CSV",
+			"downloadXLS": "Download XLS",
+			"viewData": "View data table",
+			"hideData": "Hide data table",
+			"exportData": {
+				"categoryHeader": "Category",
+				"categoryDatetimeHeader": "DateTime"
+			}
+		}
+	},
+	"version": {
+		"unset": "Software version is not set.",
+		"earlier": "Your project was made using an earlier version of SWAT+ Editor. Your project is version {projectVersion} and the editor is version {editorVersion}.",
+		"newer": "Your project was made using a version of SWAT+ Editor that is greater than the current version. Your project is version {projectVersion} and the editor is version {editorVersion}. You may encounter errors if the model has changed. Proceed at your own risk."
+	}
+}

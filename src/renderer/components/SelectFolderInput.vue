@@ -1,5 +1,7 @@
 <script setup lang="ts">
 	import { ref } from 'vue';
+	import { useI18n } from 'vue-i18n';
+	const { t } = useI18n({ useScope: 'global' });
 
 	const electron = window.electronApi;
 	const props = defineProps({
@@ -20,7 +22,7 @@
 		invalidFeedback: {
 			type: String,
 			required: false,
-			default: 'Required'
+			default: undefined
 		},
 		id: {
 			type: String
@@ -28,7 +30,7 @@
 		hint: {
 			type: String,
 			required: false,
-			default: 'Click the folder icon on the right to browse'
+			default: undefined
 		},
 		persistentHint: {
 			type: Boolean,
@@ -38,7 +40,7 @@
 
 	let model = ref(props.value);
 	let rules = {
-		required: (value:string) => !!value || props.invalidFeedback
+		required: (value:string) => !!value || (props.invalidFeedback ?? t('common.required'))
 	}
 
 	let appliedRules = props.required ? [rules.required] : [];
@@ -67,7 +69,7 @@
 
 <template>
 	<v-text-field :value="model" :label="props.label" :id="props.id" :rules="appliedRules" 
-		:hint="props.hint" :persistent-hint="props.persistentHint"
+		:hint="props.hint ?? t('components.fileInput.browseHint')" :persistent-hint="props.persistentHint"
 		@click:append="selectDirectory" append-icon="fas fa-folder-open"
 		@input="updateModelValue"
 		@change="$emit('change', $event.target.value)"

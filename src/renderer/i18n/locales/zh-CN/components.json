@@ -1,0 +1,35 @@
+{
+	"toolbox": {
+		"name": "SWAT+ 工具箱",
+		"notReady": "尚不能运行 SWAT+ 工具箱",
+		"notInstalled": "尚未安装 SWAT+ 工具箱",
+		"openError": "打开 SWAT+ 工具箱 时发生错误",
+		"runFirst": "需要先运行模型，才能在 SWAT+ 工具箱 中打开项目。",
+		"description": "SWAT+ Toolbox 可用于敏感性分析、模型率定、评价和验证。点击下方按钮下载。",
+		"configureRun": "配置模型运行",
+		"install": "安装 SWAT+ 工具箱"
+	},
+	"iahris": {
+		"name": "SWAT+ IAHRIS",
+		"notReady": "尚不能运行 SWAT+ IAHRIS",
+		"notInstalled": "尚未安装 SWAT+ IAHRIS",
+		"openError": "打开 SWAT+ IAHRIS 时发生错误",
+		"runFirst": "需要先运行模型，才能在 SWAT+ IAHRIS 中打开项目。",
+		"description": "SWAT+ IAHRIS 将 SWAT+ 与 IAHRIS 连接起来，可自动生成河流水文变化指标报告。",
+		"configureRun": "配置模型运行",
+		"install": "安装 SWAT+ IAHRIS"
+	},
+	"fileInput": {
+		"browseHint": "点击右侧文件夹图标浏览",
+		"allFiles": "所有文件",
+		"executable": "可执行文件",
+		"csv": "CSV（逗号分隔）",
+		"text": "文本",
+		"cli": "Cli / 文本"
+	},
+	"stackTrace": {
+		"title": "SWAT+ Editor 发生错误。",
+		"userGroup": "SWAT+ Editor 用户组",
+		"instructions": "如果不清楚错误原因，请将下方日志复制到{userGroup}，并附上项目数据库和其他相关文件。"
+	}
+}

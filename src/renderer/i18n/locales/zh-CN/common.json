@@ -1,0 +1,13 @@
+{
+	"save": "保存",
+	"cancel": "取消",
+	"yes": "是",
+	"no": "否",
+	"ok": "确定",
+	"open": "打开",
+	"start": "开始",
+	"create": "创建",
+	"quit": "退出",
+	"required": "必填",
+	"maximumCharacters": "最多 {count} 个字符"
+}

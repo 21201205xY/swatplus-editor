@@ -1,0 +1,35 @@
+{
+	"toolbox": {
+		"name": "SWAT+ Toolbox",
+		"notReady": "Not ready to run SWAT+ Toolbox",
+		"notInstalled": "SWAT+ Toolbox is not installed",
+		"openError": "Error opening SWAT+ Toolbox",
+		"runFirst": "You must run the model before opening your project in SWAT+ Toolbox.",
+		"description": "SWAT+ Toolbox can be used for sensitivity analysis, model calibration, evaluation, and validation. Click the button below to download.",
+		"configureRun": "Configure Model Run",
+		"install": "Install SWAT+ Toolbox"
+	},
+	"iahris": {
+		"name": "SWAT+ IAHRIS",
+		"notReady": "Not ready to run SWAT+ IAHRIS",
+		"notInstalled": "SWAT+ IAHRIS is not installed",
+		"openError": "Error opening SWAT+ IAHRIS",
+		"runFirst": "You must run the model before opening your project in SWAT+ IAHRIS.",
+		"description": "SWAT+ IAHRIS is software that links SWAT+ to IAHRIS to automatically generate reports on Indicators of Hydrologic Alteration in RIverS.",
+		"configureRun": "Configure Model Run",
+		"install": "Install SWAT+ IAHRIS"
+	},
+	"fileInput": {
+		"browseHint": "Click the folder icon on the right to browse",
+		"allFiles": "All files",
+		"executable": "Executable",
+		"csv": "CSV (Comma delimited)",
+		"text": "Text",
+		"cli": "Cli/Text"
+	},
+	"stackTrace": {
+		"title": "SWAT+ Editor has encountered an error.",
+		"userGroup": "SWAT+ Editor user group",
+		"instructions": "If you do not know the cause of the error, please copy and paste the log below into the {userGroup}. Please include your project database and any other relevant files."
+	}
+}

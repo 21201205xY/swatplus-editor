@@ -1,5 +1,7 @@
 <script setup lang="ts">
 	import { ref } from 'vue';
+	import { useI18n } from 'vue-i18n';
+	const { t } = useI18n({ useScope: 'global' });
 
 	const electron = window.electronApi;
 	const props = defineProps({
@@ -20,7 +22,7 @@
 		invalidFeedback: {
 			type: String,
 			required: false,
-			default: 'Required'
+			default: undefined
 		},
 		id: {
 			type: String
@@ -40,7 +42,7 @@
 		hint: {
 			type: String,
 			required: false,
-			default: 'Click the folder icon on the right to browse'
+			default: undefined
 		},
 		persistentHint: {
 			type: Boolean,
@@ -50,7 +52,7 @@
 
 	let model = ref(props.value);
 	let rules = {
-		required: (value:string) => !!value || props.invalidFeedback
+		required: (value:string) => !!value || (props.invalidFeedback ?? t('common.required'))
 	}
 
 	let appliedRules = props.required ? [rules.required] : [];
@@ -74,17 +76,17 @@
 		if (props.fileType == "json") {
 			filters = [{ name: 'Json', extensions: ['json'] }];
 		} else if (props.fileType == "sqlite") {
-			filters = [{ name: 'SQLite', extensions: ['sqlite','db'] },{ name: 'All files', extensions: ['*'] }]
+			filters = [{ name: 'SQLite', extensions: ['sqlite','db'] },{ name: t('components.fileInput.allFiles'), extensions: ['*'] }]
 		} else if (props.fileType == "exe") {
-			filters = [{ name: 'Executable', extensions: ['exe'] }];
+			filters = [{ name: t('components.fileInput.executable'), extensions: ['exe'] }];
 		} else if (props.fileType == "csv") {
-			filters = [{ name: 'CSV (Comma delimited)', extensions: ['csv'] }];
+			filters = [{ name: t('components.fileInput.csv'), extensions: ['csv'] }];
 		} else if (props.fileType == "cli") {
-			filters = [{ name: 'Cli/Text', extensions: ['txt','cli'] },{ name: 'All files', extensions: ['*'] }]
+			filters = [{ name: t('components.fileInput.cli'), extensions: ['txt','cli'] },{ name: t('components.fileInput.allFiles'), extensions: ['*'] }]
 		} else if (props.fileType == "text") {
-			filters = [{ name: 'Text', extensions: ['txt','csv'] },{ name: 'All files', extensions: ['*'] }]
+			filters = [{ name: t('components.fileInput.text'), extensions: ['txt','csv'] },{ name: t('components.fileInput.allFiles'), extensions: ['*'] }]
 		} else {
-			filters = [{ name: 'All files', extensions: ['*'] }]
+			filters = [{ name: t('components.fileInput.allFiles'), extensions: ['*'] }]
 		}
 
 		let files:any;
@@ -104,7 +106,7 @@
 
 <template>
 	<v-text-field :value="model" :label="props.label" :id="props.id" :rules="appliedRules" 
-		:hint="props.hint" :persistent-hint="props.persistentHint"
+		:hint="props.hint ?? t('components.fileInput.browseHint')" :persistent-hint="props.persistentHint"
 		@click:append="selectFile" append-icon="fas fa-folder-open"
 		@input="updateModelValue"
 		@change="$emit('change', $event.target.value)"

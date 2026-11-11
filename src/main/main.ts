@@ -434,6 +434,7 @@ ipcMain.on('get-app-settings', (event, arg) => {
 })
 
 ipcMain.on('add-to-store', (event, key, value) => {
+	if (key === 'uiLanguage') setApplicationLanguage(value);
 	if (store.has(key))
 		store.delete(key);
 	store.set(key, value);
@@ -640,83 +641,93 @@ function initColorTheme() {
 	setColorTheme(colorTheme);
 }
 
-//Set Menu
-const template: Electron.MenuItemConstructorOptions[] = [
-	{
-		label: 'File',
-		submenu: [
-			{role: 'quit'}
-		]
-	},
-	{
-		label: 'Edit',
-		submenu: [
-			{role: 'undo'},
-			{role: 'redo'},
-			{type: 'separator'},
-			{role: 'cut'},
-			{role: 'copy'},
-			{role: 'paste'}
-		]
-	},
-	{
-		label: 'View',
-		submenu: [
-			{role: 'toggleDevTools'},
-			{type: 'separator'},
-			{role: 'resetZoom'},
-			{role: 'zoomIn'},
-			{role: 'zoomOut'},
-			{type: 'separator'},
-			{role: 'togglefullscreen'},
-			{role: 'minimize'},
-			{role: 'forceReload'}
-		]
-	},
-	{
-		role: 'help',
-		submenu: [
-			{
-				label: 'Help Using SWAT+ Editor',
-				click () { mainWindow.webContents.send('load-from-context-menu', 'help') }
-			},
-			{
-				label: 'SWAT+ Editor Documentation',
-				click () { shell.openExternal('https://swatplus.gitbook.io/docs/') }
-			},
-			{
-				label: 'SWAT+ Input/Output Documentation',
-				click () { shell.openExternal('https://swatplus.gitbook.io/io-docs/') }
-			},
-			{
-				label: 'SWAT+ Release Notes',
-				click () { shell.openExternal('https://swatplus.gitbook.io/docs/release-notes') }
-			},
-			{
-				label: 'SWAT Website',
-				click () { shell.openExternal('https://swat.tamu.edu') }
-			},
-			{type: 'separator'},
-			{
-				label: 'Report a problem using the editor',
-				click () { shell.openExternal('https://groups.google.com/d/forum/swatplus-editor') }
-			},
-			{
-				label: 'Report a model error',
-				click () { shell.openExternal('https://groups.google.com/d/forum/swatplus') }
-			},
-			{type: 'separator'},
-			{
-				label: 'Check for updates...',
-				click () { mainWindow.webContents.send('load-from-context-menu', 'update') }
-			},
-			{
-				label: 'See releases on Github',
-				click () { shell.openExternal('https://github.com/swat-model/swatplus-editor/releases') }
-			}
-		]
-	}
-];
+// Desktop language files are shared with the renderer translation directory.
+function setApplicationLanguage(locale:string) {
+	if (locale !== 'en' && locale !== 'zh-CN') throw new Error('Unsupported UI language: ' + locale);
+	const localesPath = DEV_MODE
+		? join(app.getAppPath(), '..', '..', 'src', 'renderer', 'i18n', 'locales')
+		: join(app.getAppPath(), 'locales');
+	const labels = JSON.parse(fs.readFileSync(join(localesPath, locale, 'desktop.json'), 'utf8'));
+	const template: Electron.MenuItemConstructorOptions[] = [
+		{
+			label: labels.file,
+			submenu: [
+				{role: 'quit', ...(locale === 'zh-CN' ? {label: labels.quit} : {})}
+			]
+		},
+		{
+			label: labels.edit,
+			submenu: [
+				{role: 'undo', ...(locale === 'zh-CN' ? {label: labels.undo} : {})},
+				{role: 'redo', ...(locale === 'zh-CN' ? {label: labels.redo} : {})},
+				{type: 'separator'},
+				{role: 'cut', ...(locale === 'zh-CN' ? {label: labels.cut} : {})},
+				{role: 'copy', ...(locale === 'zh-CN' ? {label: labels.copy} : {})},
+				{role: 'paste', ...(locale === 'zh-CN' ? {label: labels.paste} : {})}
+			]
+		},
+		{
+			label: labels.view,
+			submenu: [
+				{role: 'toggleDevTools', ...(locale === 'zh-CN' ? {label: labels.toggleDevTools} : {})},
+				{type: 'separator'},
+				{role: 'resetZoom', ...(locale === 'zh-CN' ? {label: labels.resetZoom} : {})},
+				{role: 'zoomIn', ...(locale === 'zh-CN' ? {label: labels.zoomIn} : {})},
+				{role: 'zoomOut', ...(locale === 'zh-CN' ? {label: labels.zoomOut} : {})},
+				{type: 'separator'},
+				{role: 'togglefullscreen', ...(locale === 'zh-CN' ? {label: labels.togglefullscreen} : {})},
+				{role: 'minimize', ...(locale === 'zh-CN' ? {label: labels.minimize} : {})},
+				{role: 'forceReload', ...(locale === 'zh-CN' ? {label: labels.forceReload} : {})}
+			]
+		},
+		{
+			role: 'help', label: labels.help,
+			submenu: [
+				{
+					label: labels.usingEditor,
+					click () { mainWindow.webContents.send('load-from-context-menu', 'help') }
+				},
+				{
+					label: labels.editorDocumentation,
+					click () { shell.openExternal('https://swatplus.gitbook.io/docs/') }
+				},
+				{
+					label: labels.modelDocumentation,
+					click () { shell.openExternal('https://swatplus.gitbook.io/io-docs/') }
+				},
+				{
+					label: labels.releaseNotes,
+					click () { shell.openExternal('https://swatplus.gitbook.io/docs/release-notes') }
+				},
+				{
+					label: labels.website,
+					click () { shell.openExternal('https://swat.tamu.edu') }
+				},
+				{type: 'separator'},
+				{
+					label: labels.reportEditor,
+					click () { shell.openExternal('https://groups.google.com/d/forum/swatplus-editor') }
+				},
+				{
+					label: labels.reportModel,
+					click () { shell.openExternal('https://groups.google.com/d/forum/swatplus') }
+				},
+				{type: 'separator'},
+				{
+					label: labels.checkUpdates,
+					click () { mainWindow.webContents.send('load-from-context-menu', 'update') }
+				},
+				{
+					label: labels.github,
+					click () { shell.openExternal('https://github.com/swat-model/swatplus-editor/releases') }
+				}
+			]
+		}
+	];
 
-const menu = Menu.buildFromTemplate(template);
-Menu.setApplicationMenu(menu);
+	const menu = Menu.buildFromTemplate(template);
+	Menu.setApplicationMenu(menu);
+
+}
+
+setApplicationLanguage(store.get('uiLanguage') === 'zh-CN' ? 'zh-CN' : 'en');

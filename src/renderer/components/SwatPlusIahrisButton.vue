@@ -1,9 +1,11 @@
 <script setup lang="ts">
 	import { reactive, computed } from 'vue';
+	import { useI18n } from 'vue-i18n';
 	import { useHelpers } from '@/helpers';
 
 	const { constants, formatters, currentProject, utilities } = useHelpers();
 
+	const { t } = useI18n({ useScope: 'global' });
 	const electron = window.electronApi;
 
 	interface Props {
@@ -20,7 +22,7 @@
 	}
 
 	const props = withDefaults(defineProps<Props>(), {
-		text: 'SWAT+ IAHRIS',
+		text: undefined,
 		ranSwat: false,
 		noIcon: false,
 		variant: undefined,
@@ -32,6 +34,8 @@
 		asListItem: false
 	});
 
+	const buttonText = computed(() => props.text === undefined ? t('components.iahris.name') : props.text);
+
 	let unavailable = reactive({
 		show: false,
 		norun: false,
@@ -40,9 +44,9 @@
 	});
 
 	const unavailableTitle = computed(() => {
-		if (unavailable.norun) return 'Not ready to run SWAT+ IAHRIS';
-		if (unavailable.notinstalled) return 'SWAT+ IAHRIS is not installed';
-		return 'Error opening SWAT+ IAHRIS';
+		if (unavailable.norun) return t('components.iahris.notReady');
+		if (unavailable.notinstalled) return t('components.iahris.notInstalled');
+		return t('components.iahris.openError');
 	})
 
 	function open() {
@@ -68,30 +72,30 @@
 
 <template>
 	<v-list-item v-if="constants.globals.platform === 'win32' && asListItem" @click="open">
-		<v-list-item-title>{{ props.text }}</v-list-item-title>
+		<v-list-item-title>{{ buttonText }}</v-list-item-title>
 	</v-list-item>
 	<v-btn v-else-if="constants.globals.platform === 'win32' && !noIcon" @click="open" :active="false">
-		<v-icon>fas fa-folder-plus</v-icon> {{ props.text }}
+		<v-icon>fas fa-folder-plus</v-icon> {{ buttonText }}
 	</v-btn>
-	<v-btn v-else-if="constants.globals.platform === 'win32' && noIcon" @click="open" :variant="variant" :color="color" :block="block" :rounded="rounded" :size="size" :class="class">
-		{{ props.text }}
+	<v-btn v-else-if="constants.globals.platform === 'win32' && noIcon" @click="open" :variant="variant" :color="color" :block="block" :rounded="rounded" :size="size" :class="props.class">
+		{{ buttonText }}
 	</v-btn>
 
 	<v-dialog v-model="unavailable.show" width="auto">
 		<v-card :title="unavailableTitle">
 			<v-card-text>
 				<p v-if="unavailable.norun" class="py-5">
-					You must run the model before opening your project in SWAT+ IAHRIS.
+					{{ t('components.iahris.runFirst') }}
 				</p>
 				<p v-else-if="unavailable.notinstalled" class="py-5">
-					SWAT+ IAHRIS is software that links SWAT+ to IAHRIS to automatically generate reports on Indicators of Hydrologic Alteration in RIverS.
+					{{ t('components.iahris.description') }}
 				</p>
 			</v-card-text>
 			<v-divider></v-divider>
 			<v-card-actions>
-				<v-btn v-if="unavailable.norun" color="primary" variant="text" to="/run">Configure Model Run</v-btn>
-				<open-in-browser v-else-if="unavailable.notinstalled" url="https://swat.tamu.edu/software/plus/" text="Install SWAT+ IAHRIS" button color="primary" />
-				<v-btn @click="unavailable.show = false">Cancel</v-btn>
+				<v-btn v-if="unavailable.norun" color="primary" variant="text" to="/run">{{ t('components.iahris.configureRun') }}</v-btn>
+				<open-in-browser v-else-if="unavailable.notinstalled" url="https://swat.tamu.edu/software/plus/" :text="t('components.iahris.install')" button color="primary" />
+				<v-btn @click="unavailable.show = false">{{ t('common.cancel') }}</v-btn>
 			</v-card-actions>
 		</v-card>
 	</v-dialog>

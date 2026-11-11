@@ -1,0 +1,151 @@
+{
+	"openDirectory": "打开项目目录",
+	"reload": "重新加载 SWAT+ Editor",
+	"readReleaseNotes": "阅读版本说明",
+	"recentProjects": "最近的项目",
+	"openProject": "打开项目",
+	"openAnotherProject": "打开其他项目",
+	"createProject": "创建新项目",
+	"changeDescription": "修改名称和描述",
+	"status": {
+		"title": "项目状态",
+		"weather": "设置气象站和天气发生器",
+		"inputs": "已写出 SWAT+ 输入文件",
+		"run": "已运行 SWAT+",
+		"output": "已将 SWAT+ 输出导入数据库以供分析"
+	},
+	"savedScenarios": "已保存的情景",
+	"information": {
+		"title": "SWAT+ 项目信息",
+		"totalArea": "总面积",
+		"simulationPeriod": "模拟时段",
+		"createdWith": "创建软件",
+		"lastSaved": "上次保存时间"
+	},
+	"objects": {
+		"title": "对象数量",
+		"subbasins": "子流域",
+		"hrus": "水文响应单元（HRU）",
+		"channels": "河道",
+		"aquifers": "含水层",
+		"reservoirs": "水库",
+		"routingUnits": "汇流单元",
+		"landscapeUnits": "景观单元",
+		"pointSources": "点源 / 入流口"
+	},
+	"actions": {
+		"update": "更新项目",
+		"run": "运行模型",
+		"getStarted": "开始设置",
+		"rename": "修改名称",
+		"reimport": "重新导入 GIS 数据",
+		"close": "关闭项目"
+	},
+	"open": {
+		"title": "打开项目",
+		"database": "选择项目 / GIS 的 SQLite 数据库文件",
+		"required": "请选择 SQLite 数据库文件"
+	},
+	"close": {
+		"title": "关闭当前项目？",
+		"question": "即将关闭当前打开的项目 {name}。确定继续吗？"
+	},
+	"rename": {
+		"title": "修改项目名称和描述"
+	},
+	"fields": {
+		"name": "项目显示名称",
+		"description": "简述项目位置（主要河流、国家）",
+		"descriptionHint": "最多 25 个字符；空格将转换为下划线"
+	},
+	"import": {
+		"title": "从 QSWAT+ 创建 SWAT+ Editor 项目",
+		"error": "导入 GIS 数据时发生错误。",
+		"introduction": "这是首次在 SWAT+ Editor 中打开此 QSWAT+ 项目，需要将 GIS 数据导入为 SWAT+ 对象。根据项目大小，此过程可能需要几秒到几分钟。"
+	},
+	"lteDescription": "使用 SWAT+ lte？这是模型的精简版本，大幅简化水文与植物生长过程，不模拟养分，主要关注沟蚀形成和河道冲刷。",
+	"scenario": {
+		"title": "加载情景",
+		"error": "加载情景时发生错误。",
+		"replace": "替换",
+		"runScreen": "运行模型页面",
+		"warningLabel": "警告：",
+		"question": "确定加载情景 {name} 吗？此操作将{replace}编辑器中当前加载的所有内容（默认情景）。如果需要保留修改，请先另存为新情景。可以在{runScreen}保存情景。",
+		"warning": "{warning}如果 QGIS 正在运行，可能需要先完全关闭它，因为它会锁定需要替换的部分文件。加载情景前，请确保 QGIS 已关闭，然后单独打开 SWAT+ Editor。可在 Windows 搜索栏搜索“SWAT+ Editor”启动软件。"
+	},
+	"create": {
+		"title": "创建新的 SWAT+ Editor 项目",
+		"error": "创建项目时发生错误。",
+		"website": "访问我们的网站",
+		"manual": "也可以不使用 GIS 创建项目。填写下方表单即可新建 SWAT+ Editor 项目。软件将创建项目数据库，空间连接关系需要手动输入。如果已有项目数据库，请点击“取消”，然后选择“打开项目”。",
+		"folder": "选择项目文件夹",
+		"folderHint": "将在此文件夹中创建项目 SQLite 数据库文件",
+		"folderRequired": "请选择文件夹",
+		"datasets": "选择 SWAT+ datasets 的 SQLite 数据库文件",
+		"datasetsHint": "此文件将复制到上方的项目文件夹",
+		"datasetsRequired": "请选择 SQLite 数据库文件",
+		"recommendation": "强烈建议从 QSWAT+ 界面创建新的 SWAT+ 项目。QSWAT+ 将设置流域，并在完成 HRU 划分后引导你进入编辑器。如需 QSWAT+ 使用帮助，请{website}。"
+	},
+	"reimport": {
+		"title": "流域是否发生变化？",
+		"error": "重新导入项目 GIS 数据时发生错误。",
+		"question": "自上次打开 SWAT+ Editor 后，是否重新执行过 QSWAT+ 的第 1 步或第 2 步？如果执行过，需要重新导入流域数据。",
+		"explicitQuestion": "自上次打开 SWAT+ Editor 后，是否重新执行过 QSWAT+ 的第 1 步或第 2 步？或者需要重新开始，或在完整 SWAT+ 与 SWAT+ lte 之间切换？这些操作需要重新导入流域数据。警告：此前在编辑器中所做的修改可能丢失。",
+		"continue": "否，继续进入编辑器",
+		"confirm": "是，导入新的流域数据"
+	},
+	"update": {
+		"title": "正在更新项目",
+		"error": "更新项目时发生错误。",
+		"installEarlier": "安装兼容的旧版本",
+		"fullReleaseNotes": "阅读完整版本说明",
+		"before": "之前",
+		"required": "需要更新项目才能在此版本的 SWAT+ Editor 中继续使用。如果不希望更新项目，请卸载当前编辑器并{installEarlier}。",
+		"backup": "升级可能修改项目数据库。软件会先备份数据库，并保存到项目目录的 Backups 文件夹。模型输入也可能变化，因此建议在升级项目{before}{releaseNotes}，了解具体变更。"
+	},
+	"missing": {
+		"title": "未找到项目",
+		"description": "找不到项目文件。请使用“打开项目”按钮选择项目数据库文件。"
+	},
+	"errors": {
+		"load": "无法从数据库获取项目信息。",
+		"name": "请输入项目名称。",
+		"save": "无法保存修改。",
+		"folder": "请选择项目文件夹。",
+		"datasets": "请选择 datasets 的 SQLite 文件。",
+		"importName": "请在下方文本框中输入项目名称。",
+		"help": "请打开“帮助”页面并滚动到底部，检查 SWAT+ Editor 是否正常运行。必要时联系开发人员。如果计算机启动 API 较慢，可以先尝试重新加载：",
+		"encountered": "SWAT+ Editor 发生错误：{error}"
+	},
+	"welcome": "欢迎使用 SWAT+ Editor {version}",
+	"releaseIntroduction": "{link}，了解此版本的更多信息。",
+	"removeRecent": "从最近项目列表中移除 {name}",
+	"day": "第 {day} 天",
+	"chart": {
+		"title": "土地利用分布",
+		"area": "面积",
+		"lang": {
+			"contextButtonTitle": "图表菜单",
+			"viewFullscreen": "全屏查看",
+			"exitFullscreen": "退出全屏",
+			"printChart": "打印图表",
+			"downloadPNG": "下载 PNG 图片",
+			"downloadJPEG": "下载 JPEG 图片",
+			"downloadPDF": "下载 PDF 文档",
+			"downloadSVG": "下载 SVG 矢量图",
+			"downloadCSV": "下载 CSV",
+			"downloadXLS": "下载 XLS",
+			"viewData": "查看数据表",
+			"hideData": "隐藏数据表",
+			"exportData": {
+				"categoryHeader": "类别",
+				"categoryDatetimeHeader": "日期时间"
+			}
+		}
+	},
+	"version": {
+		"unset": "尚未设置软件版本。",
+		"earlier": "此项目由较早版本的 SWAT+ Editor 创建。项目版本为 {projectVersion}，当前编辑器版本为 {editorVersion}。",
+		"newer": "此项目由较新版本的 SWAT+ Editor 创建。项目版本为 {projectVersion}，当前编辑器版本为 {editorVersion}。如果模型已发生变化，可能遇到错误，请谨慎继续。"
+	}
+}
